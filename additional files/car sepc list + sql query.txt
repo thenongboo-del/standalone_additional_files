@@ -1,0 +1,164 @@
+엔진, 연료, 변속기, 최고출력, 최대토크, 배기량, 구동방식, 연료탱크, 배터리 종류, 배터리 충전 용량, 1회 충전 주행거리, 충전시간 (급속), 충전시간 (완속),공차 중량
+
+
+sql 문
+
+-- 기존 테이블 있으면 삭제
+DROP TABLE IF EXISTS hyundai_2025_models;
+
+-- 테이블 생성
+CREATE TABLE hyundai_2025_models (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    category VARCHAR(30) NOT NULL,
+    model VARCHAR(50) NOT NULL,
+    trim_year YEAR DEFAULT 2025,
+    engine VARCHAR(100),
+    fuel ENUM('가솔린','디젤','LPG','하이브리드','전기','수소') NOT NULL,
+    transmission VARCHAR(50),
+    max_power VARCHAR(30),
+    max_torque VARCHAR(30),
+    displacement DECIMAL(4,2),           -- L
+    drive_type ENUM('FWD','AWD','RWD'),
+    fuel_tank DECIMAL(5,1),              -- L (최대 999.9L)
+    battery_type VARCHAR(50),
+    battery_capacity DECIMAL(6,2),       -- kWh
+    ev_range INT,                        -- km
+    fast_charge VARCHAR(30),
+    slow_charge VARCHAR(30),
+    curb_weight INT,                     -- kg
+    note VARCHAR(200)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- 데이터 삽입 (오류 완전 수정본)
+INSERT INTO hyundai_2025_models 
+(category, model, engine, fuel, transmission, max_power, max_torque, displacement, drive_type, fuel_tank, battery_type, battery_capacity, ev_range, fast_charge, slow_charge, curb_weight, note) VALUES
+
+('경차',      '캐스퍼',              '1.0L 터보',           '가솔린',   'CVT',        '100 hp',  '17.5 kgf·m', 1.00, 'FWD', 35.0, NULL,       NULL,    NULL, NULL,     NULL,     1080, NULL),
+('경차',      '캐스퍼 일렉트릭',      '전기모터 91hp',       '전기',     '싱글스피드', '91 hp',   NULL,         NULL, 'FWD', NULL,  '리튬이온', 49.00,  315, '30분',   '7시간',  1300, 'Long Range'),
+
+('소형SUV',   '코나 가솔린',          '1.6L 터보',           '가솔린',   '7단 DCT',    '198 hp',  '27.0 kgf·m', 1.60, 'FWD', 47.0, NULL,       NULL,    NULL, NULL,     NULL,     1480, NULL),
+('준중형세단','아반떼',              '1.6L 가솔린',         '가솔린',   'IVT',        '123 hp',  '15.7 kgf·m', 1.60, 'FWD', 47.0, NULL,       NULL,    NULL, NULL,     NULL,     1280, NULL),
+('중형세단',  '쏘나타 디 엣지',       '2.5L 가솔린',         '가솔린',   '8단 자동',   '194 hp',  '25.0 kgf·m', 2.50, 'FWD', 60.0, NULL,       NULL,    NULL, NULL,     NULL,     1520, NULL),
+
+
+('대형세단',  '그랜저',               '3.5L V6',             '가솔린',   '8단 자동',   '300 hp',  '36.2 kgf·m', 3.50, 'FWD', 70.0, NULL,       NULL,    NULL, NULL,     NULL,     1780, 'Calligraphy'),
+
+
+('중형SUV',   '투싼',                '2.5L 가솔린',         '가솔린',   '8단 자동',   '191 hp',  '25.0 kgf·m', 2.50, 'FWD', 54.0, NULL,       NULL,    NULL, NULL,     NULL,     1650, NULL),
+
+('중형SUV',   '싼타페',              '2.5L 터보',           '가솔린',   '8단 자동',   '281 hp',  '42.5 kgf·m', 2.50, 'AWD', 67.0, NULL,       NULL,    NULL, NULL,     NULL,     1950, NULL),
+('대형SUV',   '팰리세이드',           '3.8L V6',             '가솔린',   '8단 자동',   '295 hp',  '36.2 kgf·m', 3.80, 'AWD', 71.0, NULL,       NULL,    NULL, NULL,     NULL,     1980, '2025 페이스리프트'),
+
+('EV',        '아이오닉 5',           '듀얼 모터',           '전기',     '싱글스피드', '325 hp',  NULL,         NULL, 'AWD', NULL,  '리튬이온', 84.00,  501, '18분',   '7시간',  2100, '84kWh AWD'),
+('EV',        '아이오닉 6',           '듀얼 모터',           '전기',     '싱글스피드', '320 hp',  NULL,         NULL, 'AWD', NULL,  '리튬이온', 84.00,  614, '18분',   '7시간',  1980, '2025 개선형'),
+('EV',        '아이오닉 9',           '듀얼 모터',           '전기',     '싱글스피드', '405 hp',  NULL,         NULL, 'AWD', NULL,  '리튬이온',110.30, 542, '20분',   '11시간', 2580, '3열 플래그십'),
+
+('수소',      '넥쏘 2025',           '연료전지 95kW',       '수소',     '싱글스피드', '204 hp',  '40.3 kgf·m',NULL, 'FWD', 156.6, NULL,       NULL,   670, '5분',    NULL,     1970, '수소탱크 용량 L'),
+
+('MPV',       '스타리아',            '2.2L 디젤',           '디젤',     '8단 자동',   '177 hp',  '43.0 kgf·m', 2.20, 'FWD', 75.0, NULL,       NULL,    NULL, NULL,     NULL,     2150, '9인승 기준');
+
+-- 확인 쿼리
+SELECT COUNT(*) AS 총_모델_수 FROM hyundai_2025_models;  -- 20개 나와야 정상
+SELECT * FROM hyundai_2025_models ORDER BY category, model;
+
+
+GV60
+GV70
+GV80
+VENUE
+KONA
+
+
+
+SANTAFE
+NEXO
+PALISADE
+IONIQ9
+STARIA
+GV60
+GV70
+GV80
+VENUE
+KONA
+TUCSAN
+IONIQ5
+CASPER
+AVANTE
+IONIQ6
+SONATA
+GRANDEUR
+
+
+MORNING
+NIRO
+NIRO-EV
+RAY
+RAY-EV
+TASMAN
+EV3
+EV5
+EV6
+EV9
+SELTOS
+STONIC
+SPORTAGE
+CARNIVAL
+MOHAVE
+PV5
+TELLURIDE
+K3
+K4
+K5
+K7
+K8
+K9
+SORENTO
+
+
+
+
+
+
+모델,엔진,연료,변속기,최고출력,최대토크,배기량,구동방식,연료탱크,배터리 종류,배터리 용량,1회 충전 주행거리,충전시간(급속),충전시간(완속),공차중량
+SANTAFE,2.5L 터보 4기통,가솔린,8단 DCT,277 hp,42.3 kgf·m,2.5 L,FWD/AWD,67 L,-,-,-,-,-,"1,930 kg"
+NEXO,수소 연료전지 110kW,수소,싱글 스피드,201 hp,40.3 kgf·m,-,FWD,156 L (수소),리튬이온,2.6 kWh,670 km,5분 (완충),-,"1,970 kg"
+PALISADE,3.8L V6 GDi,가솔린,8단 자동,291 hp,35.7 kgf·m,3.8 L,FWD/AWD,71 L,-,-,-,-,-,"2,100 kg"
+IONIQ9,듀얼 전기모터 (AWD),전기,싱글 스피드,422 hp,70.0 kgf·m,-,AWD,-,리튬이온,110 kWh,542 km,18분,10시간,"2,600 kg"
+STARIA,3.5L V6 GDi,가솔린,8단 자동,272 hp,33.8 kgf·m,3.5 L,FWD,75 L,-,-,-,-,-,"2,100 kg"
+GV60,듀얼 전기모터 Performance,전기,싱글 스피드,483 hp,70.0 kgf·m,-,AWD,-,리튬이온,77.4 kWh,380 km,18분,7.9시간,"2,300 kg"
+GV70,2.5L 터보 4기통,가솔린,8단 자동,300 hp,42.3 kgf·m,2.5 L,AWD,66 L,-,-,-,-,-,"1,960 kg"
+GV80,3.5L 트윈터보 V6,가솔린,8단 자동,375 hp,53.1 kgf·m,3.5 L,AWD,73 L,-,-,-,-,-,"2,200 kg"
+VENUE,1.6L 4기통,가솔린,IVT (CVT),121 hp,15.4 kgf·m,1.6 L,FWD,45 L,-,-,-,-,-,"1,185 kg"
+KONA,1.6L 터보 4기통,가솔린,8단 자동,190 hp,26.5 kgf·m,1.6 L,FWD/AWD,50 L,-,-,-,-,-,"1,565 kg"
+TUCSAN,2.5L 4기통,가솔린,8단 자동,187 hp,24.2 kgf·m,2.5 L,FWD/AWD,54 L,-,-,-,-,-,"1,650 kg"
+IONIQ5,듀얼 전기모터 Long Range AWD,전기,싱글 스피드,320 hp,60.5 kgf·m,-,AWD,-,리튬이온,84 kWh,501 km,18분,7시간,"2,100 kg"
+CASPER,1.0L 터보 3기통,가솔린,4단 자동,100 hp,17.5 kgf·m,1.0 L,FWD,35 L,-,-,-,-,-,"1,080 kg"
+AVANTE,1.6L 4기통,가솔린,IVT,123 hp,15.7 kgf·m,1.6 L,FWD,47 L,-,-,-,-,-,"1,280 kg"
+IONIQ6,싱글 전기모터 Long Range RWD,전기,싱글 스피드,225 hp,35.0 kgf·m,-,RWD,-,리튬이온,77.4 kWh,614 km,18분,7시간,"1,980 kg"
+SONATA,2.5L 터보 4기통,가솔린,8단 DCT,290 hp,42.3 kgf·m,2.5 L,FWD,60 L,-,-,-,-,-,"1,600 kg"
+GRANDEUR,3.5L V6,가솔린,8단 자동,300 hp,36.7 kgf·m,3.5 L,FWD,70 L,-,-,-,-,-,"1,780 kg"
+
+
+
+
+
+
+
+
+
+
+
+
+
+| 모델                                   | 엔진           | 연료  | 변속기       | 최고출력             | 최대토크              | 배기량   | 구동방식    | 연료탱크 용량  | 배터리 종류 | 배터리 용량       | 1회 충전 주행거리        | 급속 충전        | 완속 충전 | 공차중량           |
+| ------------------------------------ | ------------ | --- | --------- | ---------------- | ----------------- | ----- | ------- | -------- | ------ | ------------ | ----------------- | ------------ | ----- | -------------- |
+| **GV60 (2025, Performance AWD)**     | 듀얼 전기 모터     | 전기  | 싱글 스피드    | 429 hp (부스트 483) | 70 kgf·m (부스트 74) | -     | AWD     | -        | 리튬이온   | **84.0 kWh** | **481 km (WLTP)** | 18분 (10→80%) | 7–8시간 | 2,190 kg       |
+| **GV70 (2025, 2.5T AWD)**            | 2.5L 터보 4기통  | 가솔린 | 8단 자동     | 300 hp           | 42.3 kgf·m        | 2.5 L | AWD     | **66 L** | -      | -            | -                 | -            | -     | 1,940 kg       |
+| **GV70 Electrified (2025)**          | 듀얼 전기 모터     | 전기  | 싱글 스피드    | 429 hp (부스트 483) | 70 kgf·m          | -     | AWD     | -        | 리튬이온   | **84.0 kWh** | **380 km (EPA)**  | 18분 (10→80%) | 7.9시간 | 2,286 kg       |
+| **GV80 (2025, 2.5T AWD)**            | 2.5L 터보 4기통  | 가솔린 | 8단 자동     | 300 hp           | 42.3 kgf·m        | 2.5 L | AWD     | **73 L** | -      | -            | -                 | -            | -     | 2,184 kg       |
+| **GV80 (2025, 3.5T AWD)**            | 3.5L 트윈터보 V6 | 가솔린 | 8단 자동     | 375 hp           | 53.1 kgf·m        | 3.5 L | AWD     | **73 L** | -      | -            | -                 | -            | -     | 약 2,200 kg     |
+| **VENUE (2025)**                     | 1.6L 4기통     | 가솔린 | CVT (IVT) | 121 hp           | 15.4 kgf·m        | 1.6 L | FWD     | **45 L** | -      | -            | -                 | -            | -     | 1,185 kg       |
+| **KONA (2025, 2.0L)**                | 2.0L 4기통     | 가솔린 | CVT (IVT) | 147 hp           | 18.0 kgf·m        | 2.0 L | FWD/AWD | **47 L** | -      | -            | -                 | -            | -     | 1,330–1,400 kg |
+| **KONA (2025, 1.6T N Line)**         | 1.6L 터보 4기통  | 가솔린 | 8단 자동     | 190 hp           | 26.5 kgf·m        | 1.6 L | FWD/AWD | **47 L** | -      | -            | -                 | -            | -     | 1,565 kg       |
+| **KONA Electric (2025, Long Range)** | 싱글 전기 모터     | 전기  | 싱글 스피드    | 201 hp           | 25.6 kgf·m        | -     | FWD     | -        | 리튬이온   | **65.4 kWh** | **420 km (EPA)**  | 41분 (10→80%) | 9시간   | 1,680 kg       |
+
