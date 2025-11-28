@@ -1,0 +1,37 @@
+#s_content > div.section > ul > li:nth-child(1) > dl > dt
+
+https://kin.naver.com/search/list.naver?query=%ED%8C%8C%EC%9D%B4%EC%8D%AC
+
+
+
+#cphContents_cphContents_cphContents_udpContent > div.record_result > table
+
+
+
+
+
+
+한줄복사 : Ctrl + Alt + Up 혹은 Down
+라인이동 : Alt + Up 혹은 Down
+한줄삭제 : Ctrl + d
+주석처리 : Ctrl + 1 ⇒ 숫자 1입니다.
+코드 전체 실행 : F5
+코드 한줄 실행 : F9
+
+
+아나콘다 가상환경에서 터미널 열어서 파이선 버전을 3.14에서 3.13으로 낮추고싶은데 명령어 어떻게 쳐야되?
+conda install python=3.13
+
+특정 가상환경을 지정해서 Python 버전 바꾸기
+conda install -n 환경이름 python=3.13
+ex)conda install -n myenv python=3.13
+
+
+
+
+142.0.7444.176
+
+
+
+제미나이 API key
+AIzaSyDdMmvjRd9C9SuvX6n8lglof64etdPwOOs
